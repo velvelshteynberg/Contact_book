@@ -11,6 +11,7 @@ class Contact
       @email = email
       @note = note
       @id = @@id
+      @@all_contacts << self
       @@id += 1
   end
 
@@ -31,7 +32,7 @@ class Contact
   # and return the contact who has that id
   def self.find(id)
     @@all_contacts.each do |individual_contact|
-      if @id = id
+      if @id == "id"
         return individual_contact
       end 
     end
@@ -61,6 +62,7 @@ end
     @@all_contacts.each do |individual_contact|
     if @attribute == "value"
       return individual_contact
+      #not working
     end 
     end
   end
@@ -90,11 +92,11 @@ end
 # Velvel = Contact.new("Velvel", "Shteynberg", "velvelshteynberg@velvel.com", "Great day")
 # p Velvel
 
-Contact.create("Devorah","shteynber", "devorahshteynberg@devorah.com", "amazing day")
-Contact.create("Dev", "Shteyn", "devshteynbe@g.c", "hey")
-# p Contact.all
+devorah = Contact.create("Devorah","shteynberg", "devorahshteynberg@devorah.com", "amazing day")
+dev = Contact.create("Dev", "Shteyn", "devshteynbe@g.c", "hey")
+p Contact.all
 p "====================="
-# p Contact.find(2)
+p Contact.find(1)
 #not working
 p "====================="
 # p Contact.update(first_name)
@@ -108,7 +110,7 @@ p "====================="
 # velvel = Contact.new("Velvel", "SHteynberg", "velvels@s.s", "hey")
 # print velvel.full_name
 p "====================="
-p @@all_contacts.delete(1)
+# p @@all_contacts.delete(1)
 #not working. not sure why
 
 
