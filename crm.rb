@@ -50,34 +50,36 @@ class CRM
 
   
   def modify_existing_contact
-    print "What value would you like to modify(first_name, last_name, email, note)?"
+    puts "what is the id value of the contact that you would like to update?"
+    id = gets.chomp.to_i
+    p Contact.find(id)
+    print "What value would you like to modify in #{Contact.find(id)}(first_name, last_name, email, note)?"
     user_value_selection = gets.chomp
     print "What would you like to change the #{user_value_selection} to?"
     changed_value = gets.chomp
-    self.update(user_value_selection, changed_value) 
+    Contact.update(user_value_selection, changed_value) 
   end
 
   def delete_contact
-    @@all_contacts.delete(self)
-    p "you deleted #{self}"
-    "your remaining contacts are #{@@all_contacts}"
+    puts "what is the id value of the contact that you would like to update? If you want to delete all contacts please press 0"
+    id = gets.chomp.to_i
+    puts "The contact that you have deleted is #{Contact.delete}"
+    if id == 0
+      Contact.delete_all
+      p "You have deleted all contacts"
+    end 
   end
 
   def display_all_contacts
-    @@all_contacts
+    Contact.all
   end
 
   def search_by_attribute
     p "What attribute are you looking for? (first_name, last_name, email, note)?"
     selected_attribute = gets.chomp 
     p "What is the corresponding value to this attribute? (e.g. what is the guys first name?)"
-    its_value = gets.chomp
-    @@all_contacts.each do |individual_contact|
-      if @selected_attribute == its_value
-        return individual_contact
-      end  
-      #I dont really know why this is returning all of the value in the array
-    end 
+    its_value = gets.chomp 
+    p "THe contact that you are looking for is #{Contact.find_by(attribute, value)}"
   end 
   
 
