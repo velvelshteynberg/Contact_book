@@ -38,7 +38,6 @@ class Contact
       end 
     end
   end
-#the id part is not shifting for each new contact. not sure why not
 
   # This method should allow you to specify 
   # 1. which of the contact's attributes you want to update
@@ -47,13 +46,13 @@ class Contact
  
   def update(attribute, new_value_for_attribute)
     if attribute == "first_name" 
-      self.first_name = new_value_for_attribute
+      @first_name = new_value_for_attribute
     elsif attribute == "last_name"
-      self.last_name = new_value_for_attribute
+      @last_name = new_value_for_attribute
     elsif attribute == "email"
-      self.email = new_value_for_attribute
+      @email = new_value_for_attribute
     elsif attribute == "note"
-      self.note = new_value_for_attribute
+      @note = new_value_for_attribute
     end 
     return self 
   end 
@@ -87,14 +86,10 @@ class Contact
   "#{@first_name} #{@last_name}"
   end
 
-  # This method should delete the contact
+  # This method should delete the contact form the array of contacts
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def self.delete(index_position_of_value)
-    @@all_contacts.each do |individual_contact|
-      if individual_contact.id == index_position_of_value + 1
-        @@all_contacts.delete_at(index_position_of_value)
-      end 
-    end 
+  def delete
+    @@all_contacts.delete(self)
   end
 
   # Feel free to add other methods here, if you need them.
@@ -102,21 +97,21 @@ class Contact
 end
 
 
-devorah = Contact.create("Devorah","shteynberg", "devorahshteynberg@devorah.com", "amazing day")
-velvel = Contact.create("Velvel", "shteynberg", "velvelshteynberg@velvel.com", "fabulous day")
-p Contact.all
-p "====================="
-p Contact.find(2)
-p "====================="
-p devorah.update("note", "AMAZING DAY")
-p "====================="
-p Contact.find_by("first_name", "Velvel")
-p "====================="
-# p Contact.delete_all
-p "====================="
-p velvel.full_name
-p "====================="
-p Contact.delete(1)
+# devorah = Contact.create("Devorah","shteynberg", "devorahshteynberg@devorah.com", "amazing day")
+# velvel = Contact.create("Velvel", "shteynberg", "velvelshteynberg@velvel.com", "fabulous day")
+# p Contact.all
+# p "====================="
+# p Contact.find(2)
+# p "====================="
+# p devorah.update("note", "AMAZING DAY")
+# p "====================="
+# p Contact.find_by("first_name", "Velvel")
+# p "====================="
+# # p Contact.delete_all
+# p "====================="
+# p velvel.full_name
+# p "====================="
+# p velvel.delete
 
 
 
