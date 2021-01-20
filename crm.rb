@@ -1,23 +1,26 @@
+require_relative 'contact'
 class CRM
 
-     @@all_contacts = []
-     @@id = 1
-
-  def initialize(first_name, last_name, email, note)
-    @first_name = first_name
-    @last_name = last_name
-    @email = email
-    @note = note
-    @id = @@id
-    @@all_contacts << self
-    @@id += 1
+  def initialize
+    
   end
 
-  attr_accessor :first_name 
-  attr_accessor :last_name 
-  attr_accessor :email 
-  attr_accessor :note
-  attr_accessor :all_contacts
+  def call_option(user_selection)
+    case user_selection
+    when 1 then add_new_contact
+    when 2 then modify_existing_contact
+    when 3 then delete_contact
+    when 4 then display_all_contacts
+    when 5 then search_by_attribute
+    when 6 then "You have chosen to exit"
+    end
+  end
+
+  def main_menu
+    p print_main_menu 
+    user_selection = gets.chomp.to_i
+    call_option(user_selection)
+  end
 
    def print_main_menu
       puts '[1] Add a new contact'
@@ -42,9 +45,7 @@ class CRM
     print 'Enter a Note: '
     note = gets.chomp
   
-    new_contact = CRM.new(first_name, last_name, email, note)
-    @@all_contacts << new_contact
-    return new_contact
+    new_contact = Contact.create(first_name, last_name, email, note)
   end
 
   
@@ -53,16 +54,7 @@ class CRM
     user_value_selection = gets.chomp
     print "What would you like to change the #{user_value_selection} to?"
     changed_value = gets.chomp
-    if user_value_selection == "first_name"
-      @first_name = changed_value
-    elsif user_value_selection == "last_name"
-      @last_name = changed_value
-    elsif user_value_selection == "email"
-      @email = changed_value
-    elsif user_value_selection == "note"
-      @note = changed_value
-    end 
-    return self 
+    self.update(user_value_selection, changed_value) 
   end
 
   def delete_contact
@@ -89,28 +81,10 @@ class CRM
   end 
   
 
-  def call_option(user_selection)
-    case user_selection
-    when 1 then add_new_contact
-    when 2 then modify_existing_contact
-    when 3 then delete_contact
-    when 4 then display_all_contacts
-    when 5 then search_by_attribute
-    when 6 then "You have chosen to exit"
-    end
-  end
-
-  def main_menu
-    p print_main_menu 
-    user_selection = gets.chomp.to_i
-    call_option(user_selection)
-  end
+  
 
 end 
 
 
-velvel = CRM.new("Velvel", "Shteynberg", "Velvelshteynberg@vs.com", "Heeeeeyyyyyy")
-devorah = CRM.new("Devorah", "Shteynberg", "Devorahshteynberg@ds.com", "Helllllooooooo")
-avremel = CRM.new("Avremel", "Shteynberg", "Avremelshteynberg@as.com", "babbbbbyyyyyy")
-
-p devorah.main_menu
+a_crm_app = CRM.new
+a_crm_app.main_menu
