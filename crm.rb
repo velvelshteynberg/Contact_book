@@ -12,14 +12,16 @@ class CRM
     when 3 then delete_contact
     when 4 then display_all_contacts
     when 5 then search_by_attribute
-    when 6 then "You have chosen to exit"
+    when 6 then abort "You have chosen to exit"
     end
   end
 
   def main_menu
-    p print_main_menu 
+    while true
+    print_main_menu 
     user_selection = gets.chomp.to_i
     call_option(user_selection)
+    end
   end
 
    def print_main_menu
@@ -52,26 +54,28 @@ class CRM
   def modify_existing_contact
     puts "what is the id value of the contact that you would like to update?"
     id = gets.chomp.to_i
-    p Contact.find(id)
-    print "What value would you like to modify in #{Contact.find(id)}(first_name, last_name, email, note)?"
+    contact_wanting_to_modify = Contact.find(id)
+    puts "What value would you like to modify in #{contact_wanting_to_modify}(first_name, last_name, email, note)?"
     user_value_selection = gets.chomp
-    print "What would you like to change the #{user_value_selection} to?"
+    puts "What would you like to change the #{user_value_selection} to?"
     changed_value = gets.chomp
-    Contact.update(user_value_selection, changed_value) 
+    contact_wanting_to_modify.update(user_value_selection, changed_value) 
   end
 
   def delete_contact
     puts "what is the id value of the contact that you would like to update? If you want to delete all contacts please press 0"
     id = gets.chomp.to_i
-    puts "The contact that you have deleted is #{Contact.delete}"
+    contact_wanting_to_modify = Contact.find(id)
     if id == 0
       Contact.delete_all
       p "You have deleted all contacts"
+    else
+      print "you have deleted #{contact_wanting_to_modify.delete}"
     end 
   end
 
   def display_all_contacts
-    Contact.all
+    p Contact.all
   end
 
   def search_by_attribute
@@ -79,7 +83,7 @@ class CRM
     selected_attribute = gets.chomp 
     p "What is the corresponding value to this attribute? (e.g. what is the guys first name?)"
     its_value = gets.chomp 
-    p "THe contact that you are looking for is #{Contact.find_by(attribute, value)}"
+    p "THe contact that you are looking for is #{Contact.find_by(selected_attribute, its_value)}"
   end 
   
 
