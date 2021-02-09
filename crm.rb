@@ -11,6 +11,7 @@ class CRM
     when 2 then modify_existing_contact
     when 3 then delete_contact
     when 4 then display_all_contacts
+      #searching by attribute is not returning me the instance that I am searching for
     when 5 then search_by_attribute
     when 6 then abort "You have chosen to exit"
     end
@@ -47,8 +48,14 @@ class CRM
     print 'Enter a Note: '
     note = gets.chomp
   
-    new_contact = Contact.create(first_name, last_name, email, note)
-  end
+    contact = Contact.create(
+  first_name: first_name,
+  last_name:  last_name,
+  email:      email,
+  note:       note
+)
+  
+end
 
   
   def modify_existing_contact
@@ -59,7 +66,8 @@ class CRM
     user_value_selection = gets.chomp
     puts "What would you like to change the #{user_value_selection} to?"
     changed_value = gets.chomp
-    contact_wanting_to_modify.update(user_value_selection, changed_value) 
+    contact_wanting_to_modify.update(user_value_selection, changed_value)
+    contact_wanting_to_modify.save
   end
 
   def delete_contact
@@ -83,13 +91,17 @@ class CRM
     selected_attribute = gets.chomp 
     p "What is the corresponding value to this attribute? (e.g. what is the guys first name?)"
     its_value = gets.chomp 
-    p "THe contact that you are looking for is #{Contact.find_by(selected_attribute, its_value)}"
+   "The contact that you are looking for is #{Contact.find_by(selected_attribute, its_value)}"
   end 
   
 
   
 
 end 
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end
 
 
 a_crm_app = CRM.new
