@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="todo.css">
+    <title>display-contacts</title>
+</head>
+
+<body> 
+<h1> These are all of the contacts</h1>
+<ul>
+
+<% @all_contacts.each do |individual_family_member| %>
+
+
+<li> 
+<h1>  <%= individual_family_member[:first_name] %> <%= individual_family_member[:last_name] %> <%= individual_family_member[:email] %> <%= individual_family_member[:note] %><%= individual_family_member[:id] %> </h1> 
+<a href="/Delete_contact?First_name=<%=individual_family_member[:First_name]%>&id=<%=individual_family_member[:id]%>"> Delete</a> 
+<a href="/Modify_contact?First_name=<%=individual_family_member[:first_name]%>&Last_name=<%=individual_family_member[:last_name]%>&email=<%=individual_family_member[:email]%>&note=<%=individual_family_member[:note]%>&id=<%=individual_family_member[:id]%>">Update<a>
+</li>  
+
+<% end %>
+
+
+
+</ul>
+</body>
+</html>

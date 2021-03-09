@@ -11,7 +11,6 @@ class CRM
     when 2 then modify_existing_contact
     when 3 then delete_contact
     when 4 then display_all_contacts
-      #searching by attribute is not returning me the instance that I am searching for
     when 5 then search_by_attribute
     when 6 then abort "You have chosen to exit"
     end

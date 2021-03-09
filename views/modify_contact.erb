@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Update Contact</title>
+</head>
+
+<body>
+<h1> Update Contact
+<form action='/New_contact' method="POST">
+    <label for="name"> Update Contact Info </label>
+    <input type="text" id="Name" name="First_Name" value=<%=@first_name%>>
+    <input type="text" id="Name" name="Last_Name" value=<%=@last_name%>>
+    <input type="text" id="Name" name="Last_Name" value=<%=@email%>>
+    <input type="text" id="Name" name="Last_Name" value=<%=@note%>>
+    <input type="integer" id="Name" name="Last_Name" value=<%=@id%>>
+    <input type="submit" value="Update Contact info">
+</form>
+
+</body>
+</html>

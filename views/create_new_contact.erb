@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>NewContact</title>
+</head>
+
+<body>
+<h1> New Contact Form</h1>
+
+<% #the action command tells you that when you submit this form you want to go to the addmovie route and add this movie to the array of movies and display all of the movies%>
+<form action='/New_contact' method="POST">
+    <label for="name"> New Family Member Info </label>
+    <input type="text" id="Name" name="first_Name" placeholder="Please enter the first name..">
+    <input type="text" id="Name" name="last_Name" placeholder="Please enter your last name">
+    <input type="text" id="Name" name="email" placeholder="Please enter your email address..">
+    <input type="text" id="Name" name="note" placeholder="Please write a note..">
+    <input type="integer" id="Name" name="id" placeholder="Please enter your id numbers..">
+    <input type="submit" value="Create New Family Member">
+</form>
+
+</body>
+</html>
