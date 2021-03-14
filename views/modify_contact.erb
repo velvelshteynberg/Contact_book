@@ -2,18 +2,20 @@
 <html lang="en">
 
 <head>
-    <title>Update Contact</title>
+    <title> Update Contact </title>
 </head>
 
 <body>
-<h1> Update Contact
-<form action='/New_contact' method="POST">
-    <label for="name"> Update Contact Info </label>
-    <input type="text" id="Name" name="First_Name" value=<%=@first_name%>>
-    <input type="text" id="Name" name="Last_Name" value=<%=@last_name%>>
-    <input type="text" id="Name" name="Last_Name" value=<%=@email%>>
-    <input type="text" id="Name" name="Last_Name" value=<%=@note%>>
-    <input type="integer" id="Name" name="Last_Name" value=<%=@id%>>
+<h1> Update Contact </h1>
+<form action='/update_contact/<%= @contact_looking_to_modify.id%>' method="POST">
+    <label for="first_name"> First Name </label>
+    <input type="text" id="first_name" name="first_name" value=<%=@contact_looking_to_modify.first_name%>>
+    <label for="last_name"> Last Name </label>
+    <input type="text" id="last_name" name="last_name" value=<%=@contact_looking_to_modify.last_name%>>
+    <label for="email"> Email </label>
+    <input type="text" id="email" name="email" value=<%=@contact_looking_to_modify.email%>>
+    <label for="note"> Note </label>
+    <input type="text" id="note" name="note" value=<%=@contact_looking_to_modify.note%>>
     <input type="submit" value="Update Contact info">
 </form>
 

@@ -1,8 +1,6 @@
 require 'sinatra'
 require_relative './contact.rb'
 
-all_contacts = [{first_name: 'Velvel', last_name: 'Shteynberg', email: "VS@vs.com", note: "hi", id: "0"}]
-
 get '/' do
     redirect to('/developer')
 end 
@@ -12,41 +10,55 @@ get '/developer' do
 end 
 
 get '/display-contacts' do
-    @all_contacts = all_contacts
+   @all_contacts = Contact.all
     erb :display_contacts
 end 
 
-#not working. IDK why
 get '/Delete_contact' do
-    id = params[:id]
-    deleting_contact = all_contacts.find(id)
-    deleting_contact.delete[:first_name]
-    deleting_contact.delete[:last_name]
-    deleting_contact.delete[:email]
-    deleting_contact.delete[:note]
-    "<h1> You have deleted #{deleting_contact}"
+    @contact_looking_to_delete = Contact.find(params[:id])
+    erb :delete_contact
+    redirect to('/display-contacts')
 end 
 
 get '/Modify_contact' do 
-    @first_name = params[:first_name]
-    @last_name = params[:last_name]
-    @email = params[:email]
-    @note = params[:note]
-    @id = params[:id]
+    @contact_looking_to_modify = Contact.find(params[:id])
     erb :modify_contact
+    # all_contacts << Contact_wanting_to_modify
+    # redirect to('/display-contacts')
 end 
 
-post '/New_contact' do
-    new_contact = {}
-    new_contact[:first_name] = params[:first_name]
-    new_contact[:last_name]  = params[:last_name]
-    new_contact[:email] = params[:email]
-    new_contact[:note]  = params[:note]
-    new_contact[:id]  = params[:id]
-    all_contacts << new_contact
+post '/update_contact/:id' do
+    contact_wanting_to_modify = Contact.find(params[:id])
+    p params
+    contact_wanting_to_modify.first_name = params[:first_name]
+    contact_wanting_to_modify.last_name = params[:last_name]
+    contact_wanting_to_modify.email = params[:email]
+    contact_wanting_to_modify.note = params[:note]
+    contact_wanting_to_modify.save
+    # new_contact = {}
+    # new_contact[:first_name] = params[:first_name]
+    # new_contact[:last_name]  = params[:last_name]
+    # new_contact[:email] = params[:email]
+    # new_contact[:note]  = params[:note]
+    # new_contact[:id]  = params[:id]
+    # new_contact = Contact.create[first_name: params["first_name"], last_name: params["last_name"], email: params["email"], note: params[:"note"], id: params[:"id"]]
+    # all_contacts << new_contact
     redirect to('display-contacts')
 end 
 
-get '/Create_new_contact' do
+get '/New_contact_form' do
     erb :create_new_contact
+end 
+
+post '/create_new_contact' do
+    new_contact = Contact.new(first_name: params["first_name"], last_name:  params["last_name"], email: params["email"], note: params["note"])
+    new_contact.save
+    # new_contact = Contact.create
+    # new_contact.first_name = params[:first_name]
+    # new_contact.last_name = params[:last_name]
+    # new_contact.email = params[:email]
+    # new_contact.note = params[:note]
+    # new_contact.save
+
+    redirect to('/display-contacts')
 end 

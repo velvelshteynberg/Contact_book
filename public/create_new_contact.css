@@ -1,0 +1,16 @@
+.container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    border: 2px solid black;
+}
+
+div {
+    margin: 10px;
+}
+
+form {
+    background-color: steelblue;
+    border: 5px solid goldenrod;
+}
